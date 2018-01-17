@@ -7,13 +7,13 @@
                 <div class="panel panel-default">
                     <ul class="list-group">
                         <div class="panel-body">
-                            <li class="list-group-item list-group-item-action list-group-item-primary">Users</li>
-                            @if(count($users))
-                                @foreach($users as $user)
-                                    <li class="list-group-item"><a href="users/{{$user->id}}">{{$user->lastname}} {{$user->firstname}}</a></li>
+                            <li class="list-group-item list-group-item-action list-group-item-primary">Plans</li>
+                            @if(count($plans))
+                                @foreach($plans as $plan)
+                                    <li class="list-group-item"><a href="plans/{{$plan->id}}">{{$plan->plan_name}}</a></li>
                                 @endforeach
                             @else
-                                <p>No Users Found</p>
+                                <p>No Plans Found</p>
                             @endif
                         </div>
                     </ul>

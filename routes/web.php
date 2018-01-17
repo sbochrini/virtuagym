@@ -10,7 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', 'PlanController@index');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('plans', 'PlanController');
+
+//Route::get('/', 'UserController@index');
+
+Route::resource('users', 'UserController');
+
+//Route::get('users/{id}', 'UserController@show');

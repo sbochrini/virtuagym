@@ -14,6 +14,8 @@ Route::get('/', 'PlanController@index');
 
 Route::resource('plans', 'PlanController');
 
+Route::resource('plandays', 'PlandayController');
+
 //Route::get('/', 'UserController@index');
 
 Route::resource('users', 'UserController');

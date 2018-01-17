@@ -3,18 +3,23 @@
 @section('content')
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading h4">{{$plan->plan_name}}</div>
-                <div class="panel-body">
-                    <ul class="list-group">
-                        <li class="list-group-item">Desctiption: {{$plan->plan_description}}</li>
-                        <li class="list-group-item">Defficulty: {{$plan->plan_difficulty}}</li>
-                        <li class="list-group-item">Plan days
-                            @foreach($plan->days as $day)
-                                <p>{{$day->day_order}}. {{$day->day_name}}</p>
-                            @endforeach
-                        </li>
-                    </ul>
+            <div class="card">
+                <h5 class="card-header">{{$plan->plan_name}}</h5>
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted">Difficulty: {{$plan->plan_difficulty}}</h6>
+                    <p class="card-text">{{$plan->plan_description}}</p>
+                </div>
+                @foreach($plan->days as $day)
+                    <div class="card bg-light mb-3 ml-3" style="max-width: 25rem;">
+                        <div class="card-body">
+                            <h6 class="card-title">{{$day->day_name}}</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                @endforeach
+                <div class="card-body">
+                    <a href="{{ url('plandays')}}/create" class="btn btn-info btn-sm"><i class="fas fa-plus"></i> Add Day</a>
+                    <a href="#" class="btn btn-success float-right">Save</a>
                 </div>
             </div>
         </div>

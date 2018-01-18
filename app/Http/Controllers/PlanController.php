@@ -56,7 +56,7 @@ class PlanController extends Controller
     {
         /*$response="lalallalalalal";
         return response()->json($response);*/
-        return View::make('inc.sidemenu');
+        return View::make('addplan');
     }
 
     /**

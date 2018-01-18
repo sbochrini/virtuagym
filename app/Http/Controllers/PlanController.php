@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Plan;
+use Illuminate\Support\Facades\View;
 
 class PlanController extends Controller
 {
@@ -49,6 +50,13 @@ class PlanController extends Controller
     {
         $plan = Plan::find($id);
         return view('showplan')->with('plan', $plan);
+    }
+
+    public function addplanform()
+    {
+        /*$response="lalallalalalal";
+        return response()->json($response);*/
+        return View::make('inc.sidemenu');
     }
 
     /**

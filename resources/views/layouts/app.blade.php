@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Laravel</title>
 
@@ -68,10 +69,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
 </head>
-<body>
+<body style="background-image:url(https://static.virtuagym.com/v2952934/images/background1.png);">
 @include('inc.navbar')
 <div class="flex-center position-ref full-height">
-    <div class="container-fluid">
+    <div class="container">
         @yield('content')
         <footer id="footer" class="text-center">
             <hr>
@@ -81,3 +82,21 @@
 </div>
 </body>
 </html>
+<script>
+    $(function () {
+        $("#btn_add_plan").on('click', function () {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type:"POST",
+                url: 'plans/addplanform',
+                dataType:"HTML",
+                success: function(response) {
+                    document.getElementById('div_add_plan').innerHTML=response;
+                }
+            });
+        });
+    });
+
+</script>

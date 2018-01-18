@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exercise;
 use Illuminate\Http\Request;
 
 class PlandayController extends Controller
@@ -23,7 +24,8 @@ class PlandayController extends Controller
      */
     public function create()
     {
-        return view('plandays/create');
+        $exercises=Exercise::orderBy('id')->pluck('exercise_name', 'id');
+        return view('plandays/create')->with('exercises',$exercises);
     }
 
     /**

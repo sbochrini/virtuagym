@@ -20,4 +20,6 @@ Route::resource('plandays', 'PlandayController');
 
 Route::resource('users', 'UserController');
 
+Route::post('plans/addplanform', 'PlanController@addplanform');
+
 //Route::get('users/{id}', 'UserController@show');

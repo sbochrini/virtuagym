@@ -11,7 +11,7 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label for="plan_dificulty">Difficulty</label>
-                <input type="text" class="form-control" name=plan_dificulty" id="plan_dificulty" placeholder="" value="" required>
+                <input type="text" class="form-control" name="plan_dificulty" id="plan_dificulty" placeholder="" value="" required>
                 <div class="invalid-feedback">
                     Difficulty is required.
                 </div>

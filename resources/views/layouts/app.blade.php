@@ -108,15 +108,32 @@
     }
     function addPlanDays() {
         var html_collapse='';
+        count_day++;
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type:"POST",
-            url: 'plans/getexercises',
-            success:myCallback
+            dataType:"HTML",
+            data:{'count_day':count_day},
+            url: 'plans/addplanday',
+            success:function(response) {
+                if(count_day==1){
+                    document.getElementById('ul_addplanday').innerHTML=response;
+                }else{
+                    $("#ul_addplanday").append(response);
+                }
+            },
+            error : function(request,error)
+            {
+                alert("Request: "+JSON.stringify(request));
+            }
         });
-        if(count_day==0){
+
+        function addExercise() {
+
+        }
+        /*if(count_day==0){
             count_day++;
             html_collapse='<div class="collapse" id="planday_collapse_'+count_day+'">'+
                 '<div class="card">'+
@@ -136,7 +153,7 @@
                 '</div></div></div>';
             $("#ul_addplanday").append('<li id="li_'+count_day+'" class="list-group-item"><div class="form-group row"><label class="col-md-2 col-form-label">Day '+ count_day +'</label><div class="col-md-6"><input id="day_'+count_day+'" name="day_[]" type="text" class="form-control" placeholder=" Name"></div><div class="col-md-1 pl-1"><button type="button" class="btn btn-light"><i class="far fa-trash-alt"></i></button></div>'+
                 '<div class="col-md-3"><a id="btn_addexercise" data-toggle="collapse" href="#planday_collapse_'+count_day+'" role="button" aria-expanded="false" aria-controls="planday_collapse_'+count_day+'"><i class="fa fa-plus fa-sm"></i><small> Add exercise</small></a></div></div></li>'+html_collapse);
-        }
+        }*/
     }
 
     /*function addExercise() {

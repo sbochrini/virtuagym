@@ -58,16 +58,14 @@ class PlanController extends Controller
         return View::make('addplan');
     }
 
-    public function getexercises()
+    public function addplanday(Request $request)
     {
-        $html='';
+        $count_day=$request->count_day;
+        //$html='';
         $exercises=Exercise::all();
-        $html.='<select class="custom-select"><option selected>Select an exercise</option>';
-        foreach ($exercises as $exercise):
-            $html.='<option value="'.$exercise->id.'">'.$exercise->exercise_name.'</option>';
-        endforeach;
-        $html.='</select>';
-        return $html;
+        /*$html.='';
+        return $html;*/
+        return View::make('addplanday')->with('count_day',$count_day)->with('exercises',$exercises);
 
     }
 

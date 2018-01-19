@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exercise;
 use Illuminate\Http\Request;
 use App\Plan;
 use Illuminate\Support\Facades\View;
@@ -54,9 +55,20 @@ class PlanController extends Controller
 
     public function addplanform()
     {
-        /*$response="lalallalalalal";
-        return response()->json($response);*/
         return View::make('addplan');
+    }
+
+    public function getexercises()
+    {
+        $html='';
+        $exercises=Exercise::all();
+        $html.='<select class="custom-select"><option selected>Select an exercise</option>';
+        foreach ($exercises as $exercise):
+            $html.='<option value="'.$exercise->id.'">'.$exercise->exercise_name.'</option>';
+        endforeach;
+        $html.='</select>';
+        return $html;
+
     }
 
     /**

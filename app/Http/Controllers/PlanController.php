@@ -38,7 +38,7 @@ class PlanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return response()->json($request);
     }
 
     /**
@@ -60,12 +60,15 @@ class PlanController extends Controller
 
     public function addplanday(Request $request)
     {
-        $count_day=$request->count_day;
-        //$html='';
         $exercises=Exercise::all();
-        /*$html.='';
-        return $html;*/
-        return View::make('addplanday')->with('count_day',$count_day)->with('exercises',$exercises);
+        $count_day=$request->count_day;
+        if(!isset($request->count_exercise)){
+            return View::make('addplanday')->with('count_day',$count_day)->with('exercises',$exercises);
+        }else{
+            $count_exercise=$request->count_exercise;
+            return View::make('addplanday')->with('count_day',$count_day)->with('count_exercise',$count_exercise)->with('exercises',$exercises);
+        }
+
 
     }
 

@@ -1,6 +1,7 @@
 <div class="card col-md mt-4 order-md-1">
     <h4 class="mb-3 mt-3">Workout Editor</h4>
-    <form class="needs-validation" novalidate id="form_addplan">
+    <form class="needs-validation" novalidate id="form_addplan" action="#" method="post">
+        {!! csrf_field() !!}
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="plan_name">Workout Name</label>

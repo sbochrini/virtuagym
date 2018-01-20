@@ -22,6 +22,8 @@ Route::resource('users', 'UserController');
 
 Route::post('plans/addplanform', 'PlanController@addplanform');
 
-Route::post('plans/addplanday', 'PlanController@getexercises');
+Route::post('plans/addplanday', 'PlanController@addplanday');
+
+Route::post('plans/store', 'Controller@store');
 
 //Route::get('users/{id}', 'UserController@show');

@@ -100,72 +100,83 @@
     });
 
     var count_day=0;
-    var count_exercise=0;
-    var dropdown;
-    function myCallback(response) {
-        console.log(response);
-        dropdown=response;
-    }
+    var count_exercise=1;
+
     function addPlanDays() {
-        var html_collapse='';
         count_day++;
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            type:"POST",
-            dataType:"HTML",
-            data:{'count_day':count_day},
+            type: "POST",
+            dataType: "HTML",
+            data: {'count_day': count_day},
             url: 'plans/addplanday',
-            success:function(response) {
-                if(count_day==1){
-                    document.getElementById('ul_addplanday').innerHTML=response;
-                }else{
+            success: function (response) {
+                if (count_day == 1) {
+                    document.getElementById('ul_addplanday').innerHTML = response;
+                } else {
                     $("#ul_addplanday").append(response);
                 }
             },
-            error : function(request,error)
-            {
-                alert("Request: "+JSON.stringify(request));
+            error: function (request, error) {
+               // alert("Request: " + JSON.stringify(request));
+            }
+        });
+    }
+
+    function addExercise(id) {
+        count_exercise++;
+        var split_id=id.split("_");
+        count_day=split_id[3];
+
+        var elements= $('.exercise_container_'+count_day);
+        var length = elements.length;
+        var ele;
+        elements.each(function(index, element) {
+            if (index === (length - 1)) {
+                ele=$(this);
+                console.log('Last field, submit form here');
+            }
+        });
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: "POST",
+            dataType: "HTML",
+            data: {
+                'count_exercise': count_exercise,
+                'count_day': count_day,
+            },
+            url: 'plans/addplanday',
+            success: function (response) {
+                ele.append(response);
+            },
+            error: function (request, error) {
+               // alert("Request: " + JSON.stringify(request));
             }
         });
 
-        function addExercise() {
-
-        }
-        /*if(count_day==0){
-            count_day++;
-            html_collapse='<div class="collapse" id="planday_collapse_'+count_day+'">'+
-                '<div class="card">'+
-                '<div class="card-body">'+dropdown+
-                '<p class="card-text"><small>Difficulty: </small></p>'+
-                '<p class="card-text"><small>Duration: </small></p>'+
-                '</div></div></div>';
-            document.getElementById('ul_addplanday').innerHTML='<li id="li_'+count_day+'" class="list-group-item"><div class="form-group row"><label class="col-md-2 col-form-label">Day '+ count_day +'</label><div class="col-md-6"><input id="day_'+count_day+'" name="day_[]" type="text" class="form-control" placeholder=" Name"></div><div class="col-md-1 pl-1"><button type="button" class="btn btn-light"><i class="far fa-trash-alt"></i></button></div>'+
-            '<div class="col-md-3"><a id="btn_addexercise" data-toggle="collapse" href="#planday_collapse_'+count_day+'" role="button" aria-expanded="false" aria-controls="planday_collapse_'+count_day+'"><i class="fa fa-plus fa-sm"></i><small> Add exercise</small></a></div></div></li>'+html_collapse;
-        }else{
-            count_day++;
-            html_collapse='<div class="collapse" id="planday_collapse_'+count_day+'">'+
-                '<div class="card">'+
-                '<div class="card-body">'+
-                '<p class="card-text"><small>Difficulty: </small></p>'+
-                '<p class="card-text"><small>Duration: </small></p>'+
-                '</div></div></div>';
-            $("#ul_addplanday").append('<li id="li_'+count_day+'" class="list-group-item"><div class="form-group row"><label class="col-md-2 col-form-label">Day '+ count_day +'</label><div class="col-md-6"><input id="day_'+count_day+'" name="day_[]" type="text" class="form-control" placeholder=" Name"></div><div class="col-md-1 pl-1"><button type="button" class="btn btn-light"><i class="far fa-trash-alt"></i></button></div>'+
-                '<div class="col-md-3"><a id="btn_addexercise" data-toggle="collapse" href="#planday_collapse_'+count_day+'" role="button" aria-expanded="false" aria-controls="planday_collapse_'+count_day+'"><i class="fa fa-plus fa-sm"></i><small> Add exercise</small></a></div></div></li>'+html_collapse);
-        }*/
     }
 
-    /*function addExercise() {
-        if(count_exercise==0){
-            console.log("zero");
-            count_exercise++;
-            document.getElementById('ul_addexersize').innerHTML='<li id="li_'+count_exercise+'" class="list-group-item"><div class="form-group row"><label class="col-md-3 col-form-label pr-0 pl-0">Day '+ count_exercise +'</label><div class="col-md-7 pr-0 pl-0"><input id="day_'+count_exercise+'" name="day_[]" type="text" class="form-control pr-0 pl-0" placeholder=" Name"></div><div class="col-md-2"><i class="far fa-trash-alt"></i></div></div></li>';
-        }else{
-            console.log("nozero");
-            //var li_id="li_"+count;
-            count_exercise++;
-            $("#ul_addexersize").append('<li id="li_'+count_exercise+'" class="list-group-item"><div class="form-group row"><label class="col-md-3 col-form-label pr-0 pl-0">Day '+ count_exercise +'</label><div class="col-md-7 pr-0 pl-0"><input id="day_'+count_exercise+'" name="day[]" type="text" class="form-control pr-0 pl-0" placeholder=" Name"></div><div class="col-md-2"><i class="far fa-trash-alt"></i></div></div></li>');
-        }
-    }*/
+    $(document).ready(function() {
+        $(document).on('form_addplan', '#reg-form', function(e) {
+            var data = $("#reg-form").serialize();
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: 'plans/store"',
+                data: data,
+                success: function(data) {
+                    alert("success");
+                    console.log(data);
+                },
+                error: function(data) {
+                    alert("error");
+                }
+            });
+            return false;
+        });
+    });
 </script>

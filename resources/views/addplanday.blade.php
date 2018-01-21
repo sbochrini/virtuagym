@@ -4,7 +4,7 @@
             <input type="text" hidden name="day[{{$count_day}}][day_order]" value="{{$count_day}}">
             <label class="col-md-2 col-form-label">Day {{$count_day }}</label>
             <div class="col-md-6">
-                <input id="day_{{$count_day}}" name="day[{{$count_day}}][planday_name]" type="text" class="form-control" placeholder=" Name">
+                <input id="day_{{$count_day}}" name="day[{{$count_day}}][day_name]" type="text" class="form-control" placeholder=" Name">
             </div>
             <div class="col-md-1 pl-1">
                 <button type="button" class="btn btn-light"><i class="far fa-trash-alt"></i></button>

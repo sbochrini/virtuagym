@@ -24,6 +24,7 @@ Route::post('plans/addplanform', 'PlanController@addplanform');
 
 Route::post('plans/addplanday', 'PlanController@addplanday');
 
-Route::post('plans/store', 'Controller@store');
+Route::post('plans/store', 'PlanController@store');
+Route::get('plans/store', 'PlanController@planli');
 
 //Route::get('users/{id}', 'UserController@show');

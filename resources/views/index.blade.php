@@ -11,7 +11,7 @@
                     <button id="btn_add_plan" class="btn btn-primary btn-sm float-right"><i class="fas fa-plus"></i> Add new Workout Plan</button>
                 </div>
             </div>
-            <ul class="list-group">
+            <ul id="plans_ul" class="list-group">
                 @if(count($plans))
                     @foreach($plans as $plan)
                         <li class="list-group-item mb-1">

@@ -1,6 +1,6 @@
 <div class="card col-md mt-4 order-md-1">
     <h4 class="mb-3 mt-3">Workout Editor</h4>
-    <form class="needs-validation" novalidate id="form_addplan" action="#" method="post">
+    <form class="needs-validation" novalidate id="form_addplan" action="plans" method="post">
         {!! csrf_field() !!}
         <div class="row">
             <div class="col-md-6 mb-3">
@@ -12,13 +12,14 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label for="plan_dificulty">Difficulty</label>
-                <input type="text" class="form-control" name="plan_dificulty" id="plan_dificulty" placeholder="" value="" required>
-                <div class="invalid-feedback">
-                    Difficulty is required.
-                </div>
+                <select name="plan_difficulty" class="form-control">
+                    <option selected>Choose...</option>
+                    @foreach ($difficulty_levels as $difficulty_level):
+                    <option value="{{$difficulty_level->id}}">{{$difficulty_level->level_name}}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
-
         <div class="mb-3">
             <label for="plan_description">Description</label>
             <textarea type="text" class="form-control" name="plan_description" placeholder="" required></textarea>

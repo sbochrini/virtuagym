@@ -36,7 +36,8 @@ Route::post('users/adduserform', 'UserController@adduserform');
 
 Route::get('users/{id}/delete/', 'UserController@delete');
 
-//Route::post('plans/create', 'PlanController@create');
+//Route::post('users/create', 'UserController@create')->name('users.create');
+Route::post('users/store/',['as' => 'users.store',  'uses' => 'UserController@store']);
 //Route::get('plans/store', 'PlanController@planli');
 
 //Route::get('users/{id}', 'UserController@show');

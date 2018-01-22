@@ -16,4 +16,9 @@ class Plan extends Model
     public function difficulty(){
         return $this->hasOne('App\DifficultyLevel', 'id', 'plan_difficulty');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User');
+    }
 }

@@ -6,6 +6,7 @@ use App\Plan;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -16,14 +17,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('created_at', 'desc')->get();
+        $users = User::orderBy('id', 'desc')->get();
         return view('users')->with('users', $users);
     }
 
     public function adduserform()
     {
-        $plans=Plan::all();
-        return View::make('adduser')->with('plans',$plans);
+        $user=new User();
+        $plans=Plan::all()->pluck('plan_name', 'id');
+        return View::make('adduser')->with('plans',$plans)->with('user',$user);
     }
     /**
      * Show the form for creating a new resource.
@@ -32,7 +34,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -43,7 +45,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $user = new User();
+        $user->firstname=$data['firstname'];
+        $user->lastname=$data['lastname'];
+        $user->email=$data['email'];
+        $user->phone=$data['phone'];
+        $user->save();
+        foreach ($data['plans'] as $plan):
+            DB::table('user_plans')->insert(
+                ['user_id' => $user->id, 'plan_id' => $plan]
+            );
+        endforeach;
+        return redirect('users');
     }
 
     /**

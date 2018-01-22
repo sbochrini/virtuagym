@@ -1,10 +1,10 @@
 <div class="card col-md mt-4 order-md-1">
     <h4 class="mb-3 mt-3">User Editor</h4>
-    {{ Form::open(array('class' => 'form')) }}
+    {{ Form::model($user, ['method' => 'POST', 'route' => ['users.store'], 'class' => 'form-control']) }}
 
     <div class="form-group">
         {!! Form::label('Firstame') !!}
-        {!! Form::text('name', null,
+        {!! Form::text('firstname', null,
         array('required',
         'class'=>'form-control',
         //'placeholder'=>'Your name'
@@ -13,7 +13,7 @@
 
     <div class="form-group">
         {!! Form::label('Lastame') !!}
-        {!! Form::text('name', null,
+        {!! Form::text('lastname', null,
         array('required',
         'class'=>'form-control')) !!}
     </div>
@@ -31,8 +31,10 @@
         array('required',
         'class'=>'form-control')) !!}
     </div>
-
-
+        <div class="form-group">
+        {!! Form::label('Plans') !!}
+        {!! Form::select('plans[]', $plans, null,  array('multiple' => true, 'class'=>'form-control')) !!}
+    </div>
     <div class="form-group">
         {!! Form::submit('Save',
         array('class'=>'btn btn-success')) !!}

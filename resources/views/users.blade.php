@@ -5,39 +5,39 @@
         <div class="col-md-6 col-md-offset-2">
             <div class="row">
                 <div class="col">
-                    <h5 class="card-title">Workout Plans</h5>
+                    <h5 class="card-title">Users</h5>
                 </div>
                 <div class="col">
-                    <button id="btn_add_plan" class="btn btn-primary btn-sm float-right"><i class="fas fa-plus"></i> Add new Workout Plan</button>
+                    <button id="btn_add_user" class="btn btn-primary btn-sm float-right"><i class="fas fa-plus"></i> Add new User</button>
                 </div>
             </div>
             <ul id="plans_ul" class="list-group">
-                @if(count($plans))
-                    @foreach($plans as $plan)
+                @if(count($users))
+                    @foreach($users as $user)
                         <li class="list-group-item mb-1">
                             <div class="row">
                                 <div class="col-md-auto">
-                                    <img src="gym2.png" style="height: 117px; width: 117px;">
+                                    <img src="user.png" style="height: 117px; width: 117px;">
                                 </div>
                                 <div class="col">
                                     <div class="row">
                                         <div class="col">
-                                            <div class="card-title">{{$plan->plan_name}}</div>
+                                            <div class="card-title">{{$user->lastname}} {{$user->firstname}}</div>
                                         </div>
                                         <div class="col">
-                                            <a class="btn btn-light btn-sm" href="{{ url('/plans/' . $plan->id . '/edit') }}" role="button"><i class="far fa-edit"></i>Edit</a>
+                                            <a class="btn btn-light btn-sm" href="{{ url('/users/' . $user->id . '/edit') }}" role="button"><i class="far fa-edit"></i>Edit</a>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            <a data-toggle="collapse" href="#plan_collapse{{$plan->id}}" role="button" aria-expanded="false" aria-controls="plan_collapse{{$plan->id}}">
-                                                <small>Info</small>
+                                            <a data-toggle="collapse" href="#user_collapse{{$user->id}}" role="button" aria-expanded="false" aria-controls="user_collapse{{$user->id}}">
+                                                <small>Details</small>
                                             </a>
-                                            <div class="collapse" id="plan_collapse{{$plan->id}}">
+                                            <div class="collapse" id="user_collapse{{$user->id}}">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <p class="card-text"><small>Difficulty: {{$plan->difficulty->level_name}}</small></p>
-                                                        <p class="card-text"><small>Description: {{$plan->plan_description}}</small></p>
+                                                        <p class="card-text"><small>Email: {{$user->email}}</small></p>
+                                                        <p class="card-text"><small>Phone: {{$user->phone}}</small></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -52,7 +52,7 @@
                 @endif
             </ul>
         </div>
-        <div id="div_add_plan" class="col-md-6 col-md-offset-2">
+        <div id="div_add_user" class="col-md-6 col-md-offset-2">
 
         </div>
     </div>

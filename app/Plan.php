@@ -12,4 +12,8 @@ class Plan extends Model
     public function days(){
         return $this->hasMany('App\PlanDay');
     }
+
+    public function difficulty(){
+        return $this->hasOne('App\DifficultyLevel', 'id', 'plan_difficulty');
+    }
 }

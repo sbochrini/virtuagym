@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\View;
 
 class UserController extends Controller
 {
@@ -15,9 +16,13 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderBy('created_at', 'desc')->get();
-        return view('welcome')->with('users', $users);
+        return view('users')->with('users', $users);
     }
 
+    public function adduserform()
+    {
+        return View::make('adduser');
+    }
     /**
      * Show the form for creating a new resource.
      *

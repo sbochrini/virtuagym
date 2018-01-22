@@ -25,6 +25,14 @@ Route::post('plans/addplanform', 'PlanController@addplanform');
 Route::post('plans/addplanday', 'PlanController@addplanday');
 
 Route::post('plans/store', 'PlanController@store');
-Route::get('plans/store', 'PlanController@planli');
+
+Route::post('plans/{id}/edit/', 'PlanController@edit');
+
+Route::post('plans/{id}/update', 'PlanController@update');
+
+Route::post('users/adduserform', 'UserController@adduserform');
+
+//Route::post('plans/create', 'PlanController@create');
+//Route::get('plans/store', 'PlanController@planli');
 
 //Route::get('users/{id}', 'UserController@show');

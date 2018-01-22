@@ -88,12 +88,9 @@ $(document).ready(function() {
             type: 'POST',
             url: 'plans/store',
             data: data,
-            dataType: 'json',
-            mimeType: "multipart/form-data",
-            success: function(response) {
-                /* $.get('plans/store', function(){
-                 $("#plans_ul").prepend(response);
-                 });*/
+            //dataType: 'json',
+            success: function(data) {
+                alert("You have successfully save your workout plan");
                /* html='<li class="list-group-item mb-1"><div class="row"><div class="col-md-auto"><img src="gym2.png" style="height: 117px; width: 117px;">'+
                     '</div><div class="col"><div class="row"><div class="col"><div class="card-title">'+response.plan_name+'</div></div>'+
                     '<div class="col"><button class="btn btn-default btn-sm">Edit</button></div></div><div class="row"><div class="col">'+
@@ -101,34 +98,66 @@ $(document).ready(function() {
                     '<small>Info</small></a><div class="collapse" id="plan_collapse'+response.id+'"><div class="card"><div class="card-body">'+
                     '<p class="card-text"><small>Difficulty: '+response.plan_difficulty+'</small></p><p class="card-text"><small>Description: '+response.plan_description+'</small></p>'+
                     '</div></div></div></div></div></div></div></li>';*/
-                $("#plans_ul").prepend(response);
-                //fetchItems();
+                //$("#plans_ul").prepend(data.html);
+                //fetchItems(response);
             },
             error: function(data) {
                 alert("error");
             }
-            /*complete: function(response){
-             $("#plans_ul").prepend(response);
-             }*/
         });
-
-        /*$.get('plans/store', function(response){
-         $("#plans_ul").prepend(response);
-         });*/
         return false;
     });
+
+   /* $('#form_updateplan').on('submit', function(e) {
+        var data = $("#form_updateplan").serialize();
+        console.log(data);
+        e.preventDefault();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'POST',
+            url: '',
+            data: data,
+            //dataType: 'json',
+            success: function(data) {
+                alert("The workout plan has been updated");
+            },
+            error: function(data) {
+                alert("error");
+            }
+        });
+        return false;
+    });*/
 });
 
 // Fetching items
-var fetchItems = function() {
+var fetchItems = function(data) {
     $.ajax({
         type: "GET",
         url: "plans/planli",
+        data:data,
         success: function(response) {
-            $("#plans_ul").prepend(response);;
+            $("#plans_ul").prepend(response);
         },
         error: function(error) {
             alert("Error fetching items: " + error);
         }
     });
 }
+
+$(function () {
+    $("#btn_add_user").on('click', function () {
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type:"POST",
+            url: 'users/adduserform',
+            dataType:"HTML",
+            success: function(response) {
+                document.getElementById('div_add_user').innerHTML=response;
+            }
+        });
+    });
+});

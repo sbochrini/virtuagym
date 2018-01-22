@@ -20,7 +20,7 @@ class PlanController extends Controller
      */
     public function index()
     {
-        $plans = Plan::all();
+        $plans = Plan::orderBy('id','desc')->get();
         return view('index')->with('plans', $plans);
     }
 
@@ -70,12 +70,19 @@ class PlanController extends Controller
                 $exercise->save();
             endforeach;
         endforeach;
+        return redirect('plans');
+        /*$html = view('planli')->with(compact('plan'))->render();
+        return response()->json(['success' => true, 'html' => $html]);*/
+       /* $view = View::make('planli', ['plan' => $plan]);
+        $contents = $view->render();
+        return $contents;*/
+        //return response()->json($plan);
         /*$contents = View::make('planli')->with('plan',$plan);
         $response = Response::make($contents,);
         $response->header('Content-Type', 'text/plain');
         return $response;*/
         //return response()->json($request);
-        return View::make('planli')->with('plan',$plan);
+        //return View::make('planli')->with('plan',$plan);
         /*if ($request->isMethod('post')){
             return response()->json(['response' => $plan]);
         }
@@ -83,9 +90,10 @@ class PlanController extends Controller
         return response()->json(['response' => 'This is get method']);*/
     }
 
-    public function planli()
+    public function planli($id)
     {
-        return View::make('planli');
+        $plan=Plan::find($id);
+        return View::make('planli')->with('plan',$plan);
     }
 
     /**
@@ -128,7 +136,11 @@ class PlanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $plan=Plan::find($id);
+        $difficulty_levels=DifficultyLevel::all();
+        $def_exercises=Exercise::orderBy('id','asc')->get();
+        return view('editplan')->with('plan', $plan)->with('difficulty_levels',$difficulty_levels)->with('def_exercises',$def_exercises);
+
     }
 
     /**
@@ -140,7 +152,36 @@ class PlanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $plan=Plan::find($id);
+        $plan->plan_name=$data['plan_name'];
+        $plan->plan_description=$data['plan_description'];
+        $plan->plan_difficulty=$data['plan_difficulty'];
+        $plan->save();
+        $days= PlanDay::where('plan_id',$plan->id)->get();
+        foreach($days as $day):
+            $exercises=ExerciseInstance::where('day_id',$day->id)->get();
+            foreach ($exercises as $exercise):
+                $exercise->delete();
+            endforeach;
+            $day->delete;
+        endforeach;
+        foreach ($data['day'] as $d):
+            $day= new PlanDay();
+            $day->plan_id=$plan->id;
+            $day->day_name=$d['day_name'];
+            $day->order=$d['day_order'];
+            $day->save();
+            foreach ($d['exercises'] as $e):
+                $exercise= new ExerciseInstance();
+                $exercise->exercise_id= $e['exercise_id'];
+                $exercise->day_id=$day->id;
+                $exercise->order=$e['exercise_order'];
+                $exercise->exercise_duration=$e['exercise_duration'];
+                $exercise->save();
+            endforeach;
+        endforeach;
+        return redirect('plans');
     }
 
     /**

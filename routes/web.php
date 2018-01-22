@@ -36,8 +36,14 @@ Route::post('users/adduserform', 'UserController@adduserform');
 
 Route::get('users/{id}/delete/', 'UserController@delete');
 
-//Route::post('users/create', 'UserController@create')->name('users.create');
 Route::post('users/store/',['as' => 'users.store',  'uses' => 'UserController@store']);
+
+Route::get('users/{id}/edit/', 'UserController@edit');
+
+Route::post('users/{id}/update', ['as' => 'users.update',  'uses' => 'UserController@update']);
+
+//Route::post('users/create', 'UserController@create')->name('users.create');
+
 //Route::get('plans/store', 'PlanController@planli');
 
 //Route::get('users/{id}', 'UserController@show');

@@ -37,9 +37,7 @@
     </div>
     <div class="form-group">
         {!! Form::submit('Save',
-        array('class'=>'btn btn-success')) !!}
+        array('class'=>'btn btn-success float-right')) !!}
     </div>
     {!! Form::close() !!}
-</div>
-
 </div>

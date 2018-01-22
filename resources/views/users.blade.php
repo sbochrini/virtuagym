@@ -25,7 +25,7 @@
                                             <div class="card-title">{{$user->lastname}} {{$user->firstname}}</div>
                                         </div>
                                         <div class="col">
-                                            <a class="btn btn-light btn-sm" href="{{ url('/users/' . $user->id . '/edit') }}" role="button"><i class="far fa-edit"></i>Edit</a>
+                                            <a class="btn btn-outline-dark btn-sm" href="{{ url('/users/' . $user->id . '/edit') }}" role="button"><i class="far fa-edit"></i> Edit</a>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -41,6 +41,9 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="col">
+                                            <a class="btn btn-outline-danger btn-sm" href="{{ url('/users/' . $user->id . '/delete') }}" role="button"><i class="far fa-trash-alt"></i> Delete</a>
                                         </div>
                                     </div>
                                 </div>

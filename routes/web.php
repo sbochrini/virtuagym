@@ -28,9 +28,13 @@ Route::post('plans/store', 'PlanController@store');
 
 Route::post('plans/{id}/edit/', 'PlanController@edit');
 
+Route::get('plans/{id}/delete/', 'PlanController@delete');
+
 Route::post('plans/{id}/update', 'PlanController@update');
 
 Route::post('users/adduserform', 'UserController@adduserform');
+
+Route::get('users/{id}/delete/', 'UserController@delete');
 
 //Route::post('plans/create', 'PlanController@create');
 //Route::get('plans/store', 'PlanController@planli');

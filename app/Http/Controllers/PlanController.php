@@ -190,8 +190,20 @@ class PlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $plan=Plan::find($id);
+        $days=$plan->days;
+        foreach ($days as $day):
+            $exercises=$day->exerciseInstances;
+            foreach ($exercises as $exercise):
+                $exercise->delete();
+            endforeach;
+            $day->delete();
+        endforeach;
+        $plan->delete();
+
+        return  redirect('plans');
+
     }
 }

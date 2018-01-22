@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Plan;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\View;
@@ -21,7 +22,8 @@ class UserController extends Controller
 
     public function adduserform()
     {
-        return View::make('adduser');
+        $plans=Plan::all();
+        return View::make('adduser')->with('plans',$plans);
     }
     /**
      * Show the form for creating a new resource.

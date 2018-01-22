@@ -5,9 +5,9 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <div class="navbar-nav">
-      <li class="nav-item {{Request::is('/') ? 'active' : ''}}"><a class="nav-link" href="/plans">Home</a></li>
-      <li class="nav-item {{Request::is('todo/create') ? 'active' : ''}}"><a class="nav-link" href="{{ url('plans')}}">Workout Plans</a></li>
-      <li class="nav-item {{Request::is('todo/create') ? 'active' : ''}}"><a class="nav-link" href="{{ url('users')}}">Users</a></li>
+      {{--<li class="nav-item {{Request::is('/') ? 'active' : ''}}"><a class="nav-link" href="/plans">Home</a></li>--}}
+      <li class="nav-item {{Request::is('plans') || Request::is('/') ? 'active' : ''}}"><a class="nav-link" href="{{ url('plans')}}">Workout Plans</a></li>
+      <li class="nav-item {{Request::is('users') ? 'active' : ''}}"><a class="nav-link" href="{{ url('users')}}">Users</a></li>
     </div>
   </div>
 </nav>
